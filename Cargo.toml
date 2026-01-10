@@ -1,0 +1,25 @@
+[workspace]
+members = [
+    "auxa",
+    "auxa-core",
+    "auxa-ctx"
+]
+resolver = "3"
+
+[workspace.package]
+authors = ["Auxa"]
+categories = ["development-tools", "wasm"]
+edition = "2024"
+homepage = "https://auxa-rs.io"
+keywords = ["agentic", "ai-assisted", "code-generation"]
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/auxa-rs/auxa"
+rust-version = "1.91"
+version = "0.1.0-alpha.1"
+
+[profile.release]
+# Optimize for small code size
+lto = true
+opt-level = "s"
+strip = true
