@@ -1,3 +1,3 @@
-# Auxa Agentic SDK
+# Augentic Crates
 
-This repo contains the Auxa agentic SDK.
+This repo contains the Augentic crates.
