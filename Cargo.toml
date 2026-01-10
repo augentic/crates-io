@@ -1,20 +1,21 @@
 [workspace]
 members = [
-    "auxa",
-    "auxa-core",
-    "auxa-ctx"
+    "egis",
+    "qasr",
+    "tarus",
+    "yetti"
 ]
 resolver = "3"
 
 [workspace.package]
-authors = ["Auxa"]
+authors = ["Augentic"]
 categories = ["development-tools", "wasm"]
 edition = "2024"
-homepage = "https://auxa-rs.io"
+homepage = "https://augentic.io"
 keywords = ["agentic", "ai-assisted", "code-generation"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
-repository = "https://github.com/auxa-rs/auxa"
+repository = "https://github.com/augentic/crates-io"
 rust-version = "1.91"
 version = "0.1.0-alpha.1"
 
