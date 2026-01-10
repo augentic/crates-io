@@ -1,6 +1,6 @@
 [package]
-name = "auxa-ctx"
-description = "Auxa Context"
+name = "egis"
+description = "Egis wasm runtime"
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 authors.workspace = true

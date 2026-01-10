@@ -1,6 +1,6 @@
 [package]
-name = "auxa-core"
-description = "Auxa Core"
+name = "tarus"
+description = "Tarus wasm runtime"
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 authors.workspace = true
