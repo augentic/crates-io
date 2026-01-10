@@ -1,6 +1,6 @@
 [package]
-name = "auxa"
-description = "Decentralized Web Node SDK"
+name = "yetti"
+description = "Yetti wasm runtime"
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 authors.workspace = true

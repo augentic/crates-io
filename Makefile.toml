@@ -11,47 +11,90 @@ skip_crate_env_info = true
 skip_git_env_info = true
 skip_rust_env_info = true
 
-[tasks.semver]
-command = "cargo"
-args = ["semver-checks"]
-install_crate = "cargo-semver-checks"
+# -------------------------------------
+# CI Checks
+# -------------------------------------
+[tasks.check]
+dependencies = ["audit", "fmt", "lint", "outdated", "deps"]
 
-[tasks.pre]
-run_task = { name = [
-    "pre-dwn-node",
-    "pre-dwn-msg",
-    "pre-vc-issuer",
-    "pre-vc-verifier",
-    "pre-vc-holder",
-], parallel = true }
+[tasks.ci]
+dependencies = ["lint", "test", "test-doc", "vet", "outdated", "deny", "fmt"]
 
-[tasks.pre-dwn-node]
-command = "cargo"
-args = ["publish", "--allow-dirty", "--dry-run", "--package", "dwn-node"]
+# -------------------------------------
+# Individual Actions
+# -------------------------------------
 
-[tasks.pre-dwn-msg]
+# Audit
+[tasks.audit]
 command = "cargo"
-args = ["publish", "--allow-dirty", "--dry-run", "--package", "dwn-msg"]
+args = ["audit"]
 
-[tasks.pre-vc-issuer]
+# Clean
+[tasks.clean]
 command = "cargo"
-args = ["publish", "--allow-dirty", "--dry-run", "--package", "vc-issuer"]
+args = ["clean"]
 
-[tasks.pre-vc-verifier]
+# Deny
+[tasks.deny]
 command = "cargo"
-args = ["publish", "--allow-dirty", "--dry-run", "--package", "vc-verifier"]
+args = ["deny", "--workspace", "check"]
+install_crate = "cargo-deny"
 
-[tasks.pre-vc-holder]
-command = "cargo"
-args = ["publish", "--allow-dirty", "--dry-run", "--package", "vc-holder"]
+# Deps
+[tasks.deps]
+script = '''
+cargo +nightly udeps --all-targets
+'''
+install_crate = "cargo-udeps"
+# args = ["machete", "--skip-target-dir"]
+# install_crate = "cargo-machete"
 
-# args = release level: one of `release`, `major`, `minor`, `patch`, `alpha`, `beta`, `rc`
-[tasks.release]
+# Fmt
+[tasks.fmt]
+script = "cargo +nightly fmt --all"
+
+# Lint
+[tasks.lint]
 command = "cargo"
-args = ["release", "${@}"]
-install_crate = "cargo-release"
+args = ["clippy", "--all-features"]
+install_crate = { rustup_component_name = "clippy" }
+
+# Miri
+[tasks.miri]
+script = '''
+cargo +nightly miri setup
+cargo +nightly miri nextest run --no-tests=pass
+'''
+
+# Outdated
+[tasks.outdated]
+script = '''
+cargo outdated --workspace --exit-code 1 --depth 1
+'''
+install_crate = "cargo-outdated"
+
+# Test
+[tasks.test]
+command = "cargo"
+args = ["nextest", "run", "--all", "--all-features", "--no-tests=pass"]
+dependencies = ["clean"]
+env = { RUSTFLAGS = "-Dwarnings" }
+
+# Test Doc
+[tasks.test-doc]
+command = "cargo"
+args = ["test", "--doc", "--all-features", "--workspace"]
+
+# Vet
+[tasks.vet]
+script = '''
+cargo vet regenerate imports
+cargo vet regenerate exemptions
+cargo vet regenerate unpublished
+cargo vet --locked
+'''
+install_crate = "cargo-vet"
 
 [tasks.publish]
 command = "cargo"
-args = ["release", "${@}", "--execute"]
-install_crate = "cargo-release"
+args = ["publish", "--registry=credibil", "--allow-dirty", "--dry-run"]
