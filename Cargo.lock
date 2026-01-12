@@ -11,6 +11,10 @@ name = "qasr"
 version = "0.1.0-alpha.1"
 
 [[package]]
+name = "qwasr"
+version = "0.1.0-alpha.1"
+
+[[package]]
 name = "tarus"
 version = "0.1.0-alpha.1"
 
