@@ -7,6 +7,10 @@ name = "egis"
 version = "0.1.0-alpha.1"
 
 [[package]]
+name = "omnia"
+version = "0.1.0-alpha.1"
+
+[[package]]
 name = "qasr"
 version = "0.1.0-alpha.1"
 
