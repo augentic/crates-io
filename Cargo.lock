@@ -23,5 +23,9 @@ name = "tarus"
 version = "0.1.0-alpha.1"
 
 [[package]]
+name = "vectis"
+version = "0.1.0-alpha.1"
+
+[[package]]
 name = "yetti"
 version = "0.1.0-alpha.1"
