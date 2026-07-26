@@ -1,5 +1,5 @@
 [workspace]
-members = ["egis", "omnia", "qasr", "tarus", "yetti", "qwasr", "vectis"]
+members = ["emery", "omnia", "vectis", "specify"]
 resolver = "3"
 
 [workspace.package]

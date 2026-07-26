@@ -14,4 +14,4 @@ skip_rust_env_info = true
 
 [tasks.publish]
 command = "cargo"
-args = ["publish", "--registry=credibil", "--allow-dirty", "--dry-run"]
+args = ["publish", "--allow-dirty", "--dry-run"]
